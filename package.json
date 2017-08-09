@@ -1,0 +1,19 @@
+{
+  "name": "xml-modifier",
+  "version": "1.0.0",
+  "description": "Script to modify XML documents",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanking11/xml-modifier.git"
+  },
+  "author": "Sean King",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seanking11/xml-modifier/issues"
+  },
+  "homepage": "https://github.com/seanking11/xml-modifier#readme"
+}
