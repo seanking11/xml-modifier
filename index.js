@@ -4,30 +4,30 @@ program()
 
 function program() {
   // Read file, store in string
-  const xml = readFile()
-  modifyFile(xml)
+  const xml = readFile(modifyFile)
   // Alter string
   // Delete old file
   // Paste/make new file called application.xml
 }
 
-function readFile() {
+function readFile(cb) {
   fs.readFile('application.xml', function(err, xml) {
-    if(err)
-      console.log('Something went wrong with reading the file.', err)
-      else {
-        console.log('File read.')
-        // modifyFile(xml.toString())
-        return xml.toString()
-      }
-    })
+    if(err) throw err
+
+    console.log('File read.')
+    cb(xml.toString())
+  })
 }
 
 function modifyFile(oldXML) {
-  // console.log(oldXML)
-  const myRegexp = new RegExp('TrialSerialNumber">(\d+)');
-  const match = myRegexp.exec(oldXML)
-  // const match = myRegexp.test(oldXML)
-  // const newXML = regexp(oldXML, '(?:TrialSerialNumber">)\d+')
+  const myRegexp = /(TrialSerialNumber">)\d+/
+  const match = oldXML.replace(myRegexp, function(m, p1, p2) {
+    console.log(`Old serial number: ${p2}`)
+    return `${p1}${generateNewNumber()}`
+  })
   console.log(match)
+}
+
+function generateNewNumber() {
+  return '123456789012345678901234'
 }
