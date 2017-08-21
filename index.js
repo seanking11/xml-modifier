@@ -23,11 +23,13 @@ function modifyFile(oldXML) {
   const myRegexp = /(TrialSerialNumber">)\d+/
   const match = oldXML.replace(myRegexp, function(m, p1, p2) {
     console.log(`Old serial number: ${p2}`)
-    return `${p1}${generateNewNumber()}`
+    const newNum = generateNewNumber()
+    console.log(`New serial number: ${newNum}`)
+    return `${p1}${newNum}`
   })
   console.log(match)
 }
 
 function generateNewNumber() {
-  return '123456789012345678901234'
+  return (Math.random().toString() + Math.random().toString()).split('.').join('').substring(1, 25)
 }
