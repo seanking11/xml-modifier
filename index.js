@@ -15,11 +15,11 @@ function readFile(cb) {
     if(err) throw err
 
     console.log('File read.')
-    cb(xml.toString())
+    cb(xml.toString(), writeFile)
   })
 }
 
-function modifyFile(oldXML) {
+function modifyFile(oldXML, cb) {
   const myRegexp = /(TrialSerialNumber">)\d+/
   const match = oldXML.replace(myRegexp, function(m, p1, p2) {
     console.log(`Old serial number: ${p2}`)
@@ -27,9 +27,14 @@ function modifyFile(oldXML) {
     console.log(`New serial number: ${newNum}`)
     return `${p1}${newNum}`
   })
-  console.log(match)
+  cb(match)
 }
 
 function generateNewNumber() {
   return (Math.random().toString() + Math.random().toString()).split('.').join('').substring(1, 25)
+}
+
+function writeFile(contents) {
+  fs.writeFile('application.xml', contents)
+  console.log('Replaced serial. Trial should be new.')
 }
