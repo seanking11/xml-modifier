@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/seanking11/xml-modifier/issues"
   },
-  "homepage": "https://github.com/seanking11/xml-modifier#readme"
+  "homepage": "https://github.com/seanking11/xml-modifier#readme",
+  "dependencies": {
+    "inquirer": "^3.2.2"
+  }
 }

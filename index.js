@@ -1,21 +1,36 @@
 const fs = require('fs')
+const inquirer = require('inquirer')
 
-program()
+let path = ''
 
-function program() {
-  // Read file, store in string
-  const xml = readFile(modifyFile)
-  // Alter string
-  // Delete old file
-  // Paste/make new file called application.xml
+const ai = {
+  name: 'Adobe Illustrator',
+  value: '///Applications/Adobe Illustrator CC 2017/Support Files/AMT/AI/AMT/application.xml'
 }
 
+const ps = {
+  name: 'Adobe Photoshop',
+  value: '///Applications/Adobe Illustrator CC 2017/Support Files/AMT/AI/AMT/application.xml'
+}
+
+const question = {
+  type: 'list',
+  name: 'path',
+  message: 'Which application do you want to crack?',
+  choices: [ai, ps]
+}
+
+inquirer.prompt(question).then(function (answers) {
+    console.log(answers)
+    path = answers.path
+    console.log(path)
+    readFile(modifyFile)
+})
+
 function readFile(cb) {
-  const path = '///Applications/Adobe Illustrator CC 2017/Support Files/AMT/AI/AMT/application.xml'
   fs.readFile(path, function(err, xml) {
     if(err) throw err
 
-    console.log('File read.')
     cb(xml.toString(), writeFile)
   })
 }
@@ -37,5 +52,5 @@ function generateNewNumber() {
 
 function writeFile(contents) {
   fs.writeFile(path, contents)
-  console.log('Trial cracked. If not, run the program again.')
+  console.log('Trial cracked. If not, run the program again. Only cracks AI.')
 }
