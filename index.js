@@ -11,7 +11,8 @@ function program() {
 }
 
 function readFile(cb) {
-  fs.readFile('application.xml', function(err, xml) {
+  const path = '///Applications/Adobe Illustrator CC 2017/Support Files/AMT/AI/AMT/application.xml'
+  fs.readFile(path, function(err, xml) {
     if(err) throw err
 
     console.log('File read.')
@@ -22,7 +23,7 @@ function readFile(cb) {
 function modifyFile(oldXML, cb) {
   const myRegexp = /(TrialSerialNumber">)\d+/
   const match = oldXML.replace(myRegexp, function(m, p1, p2) {
-    console.log(`Old serial number: ${p2}`)
+    console.log(`Old serial number: ${m}`)
     const newNum = generateNewNumber()
     console.log(`New serial number: ${newNum}`)
     return `${p1}${newNum}`
@@ -35,6 +36,6 @@ function generateNewNumber() {
 }
 
 function writeFile(contents) {
-  fs.writeFile('application.xml', contents)
-  console.log('Replaced serial. Trial should be new.')
+  fs.writeFile(path, contents)
+  console.log('Trial cracked. If not, run the program again.')
 }
